@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Checkbox, FormControlLabel, Button, Snackbar, TextField, Grid, Card, CardContent, Typography, CircularProgress, Box } from '@mui/material';
 
+const API_URL = `${process.env.REACT_APP_API_URL}/api`;
+
 const SeleccionarTorneosYCategorias = () => {
   const [torneos, setTorneos] = useState([]);
   const [categorias, setCategorias] = useState([]);
@@ -16,7 +18,7 @@ const SeleccionarTorneosYCategorias = () => {
   useEffect(() => {
     const fetchTorneos = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/torneos');
+        const response = await axios.get(`${API_URL}/torneos`);
         setTorneos(response.data);
       } catch (error) {
         setError('Hubo un error al obtener los torneos.');
@@ -25,7 +27,7 @@ const SeleccionarTorneosYCategorias = () => {
 
     const fetchCategorias = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/categorias/categorias');
+        const response = await axios.get(`${API_URL}/categorias/categorias`);
         setCategorias(response.data);
       } catch (error) {
         setError('Hubo un error al obtener las categorías.');
@@ -102,7 +104,7 @@ const SeleccionarTorneosYCategorias = () => {
 
       for (const { torneoId, categorias } of payload) {
         await axios.post(
-          `http://localhost:5000/api/torneos/${torneoId}/categorias`,
+          `${API_URL}/torneos/${torneoId}/categorias`,
           { torneoId, categorias },
           {
             headers: {
@@ -127,7 +129,7 @@ const SeleccionarTorneosYCategorias = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:5000/api/categorias/categorias', {
+      const response = await axios.post(`${API_URL}/categorias/categorias`, {
         nombre: newCategoria,
       });
       setCategorias((prevCategorias) => [...prevCategorias, response.data]);
@@ -145,7 +147,7 @@ const SeleccionarTorneosYCategorias = () => {
     }
 
     try {
-      const response = await axios.put(`http://localhost:5000/api/categorias/categorias/${editCategoria.id}`, {
+      const response = await axios.put(`${API_URL}/categorias/categorias/${editCategoria.id}`, {
         nombre: editCategoria.nombre,
       });
       setCategorias((prevCategorias) =>
@@ -162,7 +164,7 @@ const SeleccionarTorneosYCategorias = () => {
 
   const handleDeleteCategoria = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/categorias/categorias/${id}`);
+      await axios.delete(`${API_URL}/categorias/categorias/${id}`);
       setCategorias((prevCategorias) => prevCategorias.filter((categoria) => categoria.id !== id));
       setSuccess('Categoría eliminada correctamente.');
     } catch (error) {

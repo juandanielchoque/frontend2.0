@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
+const API_URL = `${process.env.REACT_APP_API_URL}/api`;
+
 const TournamentListPage = () => {
   const [torneos, setTorneos] = useState([]);
   const [error, setError] = useState('');
@@ -11,7 +13,7 @@ const TournamentListPage = () => {
   useEffect(() => {
     const fetchTorneos = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/torneos');
+        const response = await axios.get(`${API_URL}/torneos`);
         setTorneos(response.data); // Guardar los torneos en el estado
       } catch (err) {
         setError('Error al obtener los torneos.');

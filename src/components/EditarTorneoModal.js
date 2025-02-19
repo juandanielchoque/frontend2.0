@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Dialog, DialogActions, DialogContent, DialogTitle, TextField, Button, Snackbar, MenuItem, Select, InputLabel, FormControl } from '@mui/material';
 import axios from 'axios';
 
+const API_URL = `${process.env.REACT_APP_API_URL}/api`;
+
 const EditarTorneoModal = ({ open, onClose, torneoId, onUpdate }) => {
   const [torneo, setTorneo] = useState({
     nombre: '',
@@ -23,7 +25,7 @@ const EditarTorneoModal = ({ open, onClose, torneoId, onUpdate }) => {
   useEffect(() => {
     if (open && torneoId) {
       setLoading(true);
-      axios.get(`http://localhost:5000/api/torneos/${torneoId}`)
+      axios.get(`${API_URL}/torneos/${torneoId}`)
         .then(response => {
           const torneoData = response.data;
 
@@ -49,7 +51,7 @@ const EditarTorneoModal = ({ open, onClose, torneoId, onUpdate }) => {
 
   useEffect(() => {
     setIsLoadingCategorias(true);
-    axios.get('http://localhost:5000/api/categorias/categorias')
+    axios.get(`${API_URL}/categorias/categorias`)
       .then(response => {
         setAllCategorias(response.data);
         setIsLoadingCategorias(false);
@@ -133,7 +135,7 @@ const EditarTorneoModal = ({ open, onClose, torneoId, onUpdate }) => {
 
       // Asegúrate de que las categorías no sean null, siempre se envía como un array (puede estar vacío)
       await axios.put(
-        `http://localhost:5000/api/torneos/${torneoId}`,
+        `${API_URL}/torneos/${torneoId}`,
         {
           ...torneo,
           categorias: categorias || [],  // Asegura que categorias sea un array vacío si es null

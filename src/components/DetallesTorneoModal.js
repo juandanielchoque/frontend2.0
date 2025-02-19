@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Dialog, DialogActions, DialogContent, DialogTitle, Button } from '@mui/material';
 import axios from 'axios';
 
+const API_URL = `${process.env.REACT_APP_API_URL}/api`;
+
 const DetallesTorneoModal = ({ open, onClose, torneoId }) => {
   const [torneo, setTorneo] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -28,7 +30,7 @@ const DetallesTorneoModal = ({ open, onClose, torneoId }) => {
       };
 
       // Realizar la solicitud GET para obtener los detalles del torneo
-      const response = await axios.get(`http://localhost:5000/api/torneos/${torneoId}`, config);
+      const response = await axios.get(`${API_URL}/torneos/${torneoId}`, config);
       setTorneo(response.data);  // Guardamos los detalles del torneo
       setLoading(false);
     } catch (error) {

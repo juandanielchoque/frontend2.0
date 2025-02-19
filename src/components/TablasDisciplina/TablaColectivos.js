@@ -16,6 +16,8 @@ import {
 import ImageIcon from '@mui/icons-material/Image';
 import ModalEvidencias from '../ComponentesTablas/ModalEvidencias';
 
+const API_URL = `${process.env.REACT_APP_API_URL}/api`;
+
 const TablaColectivos = ({ 
   partidos = [], 
   equipos = [], 
@@ -32,7 +34,7 @@ const TablaColectivos = ({
   const handleVerEvidencias = async (partidoId) => {
     setLoadingEvidencias(true);
     try {
-      const response = await fetch(`http://localhost:5000/api/evidencias/partido/${partidoId}`);
+      const response = await fetch(`${API_URL}/evidencias/partido/${partidoId}`);
       const data = await response.json();
       setEvidenciasActuales(data.data || []);
       setModalOpen(true);

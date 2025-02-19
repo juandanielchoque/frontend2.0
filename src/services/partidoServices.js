@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000/api/partidos';
+const API_URL = process.env.REACT_APP_API_URL + '/api/partidos';
 
 const getAuthConfig = () => {
   const token = localStorage.getItem('token');
@@ -100,7 +100,7 @@ const crearPartido = async (partido) => {
     if (!window.partidosEnviados) window.partidosEnviados = new Set();
     window.partidosEnviados.add(claveUnica);
 
-    const response = await axios.post("http://localhost:5000/api/partidos", partido, {
+    const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/partidos`, partido, {
       headers: {
         "Content-Type": "application/json"
       }
@@ -139,7 +139,7 @@ const actualizarPuntuacion = async (partidoId, data) => {
       return;
     }
 
-    const response = await axios.put(`http://localhost:5000/api/partidos/${partidoId}/puntuacion`, data);
+    const response = await axios.put(`${process.env.REACT_APP_API_URL}/api/partidos/${partidoId}/puntuacion`, data);
     return response.data;
   } catch (error) {
     console.error("Error al actualizar la puntuación:", error);
@@ -172,7 +172,7 @@ const subirEvidencia = async (evidenciaData) => {
     if (!window.evidenciasEnviadas) window.evidenciasEnviadas = new Set();
     window.evidenciasEnviadas.add(claveUnica);
 
-    const response = await axios.post('http://localhost:5000/api/evidencias', evidenciaData, {
+    const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/evidencias`, evidenciaData, {
       headers: {
         'Content-Type': 'application/json'
       }
@@ -221,7 +221,7 @@ const crearCompetenciaIndividual = async (competenciaData) => {
 
 const verificarEvidenciaExistente = async (partidoId) => {
   try {
-    const response = await axios.get(`http://localhost:5000/api/evidencias/verificar/${partidoId}`);
+    const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/evidencias/verificar/${partidoId}`);
     return response.data.existe; 
   } catch (error) {
     console.error('Error al verificar evidencia existente:', error);

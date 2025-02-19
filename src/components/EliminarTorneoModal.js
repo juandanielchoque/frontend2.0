@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Dialog, DialogActions, DialogContent, DialogTitle, Button, CircularProgress, Typography } from '@mui/material';
 import axios from 'axios';
 
+const API_URL = `${process.env.REACT_APP_API_URL}/api`;
+
 const EliminarTorneoModal = ({ open, onClose, torneoToDelete, onDelete }) => {
   const [loading, setLoading] = useState(false);  // Estado de carga
   const [error, setError] = useState(null);        // Estado para el manejo de errores
@@ -28,7 +30,7 @@ if (!token) {
         };
 
         // Realizar la solicitud DELETE con el token de autenticación
-        await axios.delete(`http://localhost:5000/api/torneos/${torneoToDelete}`, config);
+        await axios.delete(`${API_URL}/torneos/${torneoToDelete}`, config);
         
         setLoading(false); // Termina el estado de carga
         onDelete();  // Llamar a la función de actualización en el parent

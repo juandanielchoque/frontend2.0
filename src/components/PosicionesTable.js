@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+const API_URL = `${process.env.REACT_APP_API_URL}/api`;
+
 const PosicionesTable = ({ categoriaId }) => {
   const [posiciones, setPosiciones] = useState([]);
 
   useEffect(() => {
     // Obtener las posiciones de los equipos en la categoría
-    axios.get(`http://localhost:5000/api/categorias/${categoriaId}/posiciones`)
+    axios.get(`${API_URL}/categorias/${categoriaId}/posiciones`)
       .then(response => {
         setPosiciones(response.data);
       })

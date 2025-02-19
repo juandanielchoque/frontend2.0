@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 // Modifica la URL base para que no incluya la ruta de la API
-const API_URL = 'http://localhost:5000';
+const API_URL = process.env.REACT_APP_API_URL;
 const API_JUGADORES = `${API_URL}/api/jugadores`;
 
 const getAuthConfig = () => {

@@ -1,10 +1,12 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:5000/api/competicion';
+// Definir la URL base usando la variable de entorno
+const BASE_URL = `${process.env.REACT_APP_API_URL}/api/competicion`;
+const API_URL = process.env.REACT_APP_API_URL; // Base general de la API
 
 export const obtenerCompetenciasIndividuales = async () => {
     try {
-        const response = await axios.get(`${BASE_URL}`);
+        const response = await axios.get(BASE_URL);
         console.log('Respuesta completa competencias:', response.data);
         return {
             success: true,
@@ -39,7 +41,7 @@ export const obtenerEquiposDeCompetencia = async (competenciaId) => {
 
 export const obtenerCategoriasPorDisciplina = async (disciplinaId) => {
     try {
-        const response = await axios.get(`http://localhost:5000/api/disciplina-categorias/${disciplinaId}`);
+        const response = await axios.get(`${API_URL}/api/disciplina-categorias/${disciplinaId}`);
         return {
             success: true,
             data: response.data.data || response.data
@@ -92,7 +94,7 @@ export const obtenerEquipos = async () => {
         const config = {
             headers: { Authorization: `Bearer ${token}` }
         };
-        const response = await axios.get('http://localhost:5000/api/equipos', config);
+        const response = await axios.get(`${API_URL}/api/equipos`, config);
         const data = Array.isArray(response.data) ? response.data : 
                     Array.isArray(response.data.data) ? response.data.data : [];
         return {
@@ -111,7 +113,7 @@ export const obtenerEquipos = async () => {
 
 export const obtenerEquiposPorCategoria = async (categoriaId) => {
     try {
-        const response = await axios.get(`http://localhost:5000/api/equipos/categoria_id=${categoriaId}`);
+        const response = await axios.get(`${API_URL}/api/equipos/categoria_id=${categoriaId}`);
         return {
             success: true,
             data: response.data.data || response.data

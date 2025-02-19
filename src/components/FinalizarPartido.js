@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Button, Modal, Box, Typography, TextField, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import axios from 'axios';
 
+const API_URL = `${process.env.REACT_APP_API_URL}/api`;
+
 const FinalizarPartido = ({ open, onClose, partido, onUpdate }) => {
   const [actualizacionPartido, setActualizacionPartido] = useState({
     goles_local: partido ? partido.goles_local : '',
@@ -16,7 +18,7 @@ const FinalizarPartido = ({ open, onClose, partido, onUpdate }) => {
     }
 
     axios
-      .put(`http://localhost:5000/api/partidos/${partido.id}`, actualizacionPartido)
+      .put(`${API_URL}/partidos/${partido.id}`, actualizacionPartido)
       .then((response) => {
         onUpdate(response.data); // Actualizar el partido en el estado del componente padre
         onClose(); // Cerrar el modal

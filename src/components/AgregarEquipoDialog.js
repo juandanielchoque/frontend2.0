@@ -13,6 +13,8 @@ import axios from 'axios';
 import useNotification from '../hooks/useNotification'; 
 import Notification from '../components/notification'; 
 
+const API_URL = `${process.env.REACT_APP_API_URL}/api`;
+
 const AgregarEquipoDialog = ({ open, onClose, setNuevoEquipo, onAgregarEquipo }) => {
   const [categorias, setCategorias] = useState([]);
   const [torneosFiltrados, setTorneosFiltrados] = useState([]);
@@ -29,7 +31,7 @@ const AgregarEquipoDialog = ({ open, onClose, setNuevoEquipo, onAgregarEquipo })
   useEffect(() => {
     const fetchCategorias = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/categorias');
+        const response = await axios.get(`${API_URL}/categorias`);
         const categoriasConTorneos = response.data.reduce((acc, item) => {
           const categoriaExistente = acc.find((cat) => cat.categoria_id === item.categoria_id);
           if (categoriaExistente) {
@@ -129,7 +131,7 @@ const AgregarEquipoDialog = ({ open, onClose, setNuevoEquipo, onAgregarEquipo })
     };
 
     try {
-      const response = await axios.post('http://localhost:5000/api/equipos', equiposData);
+      const response = await axios.post(`${API_URL}/equipos`, equiposData);
       onClose(); // Cerrar el diálogo
       setFormData({ nombreEquipo: '', email: '' }); // Limpiar el formulario
       setCategoriasSeleccionadas([]);

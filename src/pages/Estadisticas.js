@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Box, Grid, Card, CardContent, Typography } from '@mui/material';
 import axios from 'axios';
 
+const API_URL = `${process.env.REACT_APP_API_URL}/api`;
+
 const Estadisticas = () => {
   const [stats, setStats] = useState({
     totalTorneos: 0,
@@ -13,7 +15,7 @@ const Estadisticas = () => {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const response = await axios.get('${API_URL}/api/torneos/estadisticas');
+        const response = await axios.get(`${API_URL}/torneos/estadisticas`);
         setStats(response.data);
       } catch (error) {
         console.error('Error al obtener estadísticas:', error);

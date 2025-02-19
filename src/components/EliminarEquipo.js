@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Button, Select, MenuItem, Typography, Box, InputLabel, FormControl } from '@mui/material';
 
+const API_URL = `${process.env.REACT_APP_API_URL}/api`;
+
 const EliminarEquipo = () => {
   const [equipos, setEquipos] = useState([]); // Guardar los equipos obtenidos
   const [equipoId, setEquipoId] = useState(''); // ID del equipo seleccionado
@@ -11,7 +13,7 @@ const EliminarEquipo = () => {
   useEffect(() => {
     const fetchEquipos = async () => {
       try {
-        const response = await axios.get('${API_URL}/api/equipos');
+        const response = await axios.get(`${API_URL}/equipos`);
         setEquipos(response.data); // Guardar los equipos en el estado
       } catch (error) {
         console.error('Error al obtener los equipos:', error);

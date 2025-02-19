@@ -17,6 +17,8 @@ import TablaColectivos from '../../components/TablasDisciplina/TablaColectivos';
 import TablaIndividuales from '../../components/TablasDisciplina/TablaIndividuales';
 import { obtenerEquipos } from '../../services/equipoServices';
 
+const API_URL = `${process.env.REACT_APP_API_URL}/api`;
+
 const VerPartidos = () => {
   // Estados principales
   const [partidos, setPartidos] = useState([]);
@@ -48,12 +50,12 @@ const VerPartidos = () => {
           categoriasRes,
         ] = await Promise.all([
           obtenerEquipos(),
-          fetch("http://localhost:5000/api/partidos").then((res) => res.json()),
-          fetch("http://localhost:5000/api/competicion").then((res) => res.json()),
-          fetch("http://localhost:5000/api/competicion/resultados").then((res) => res.json()),
-          fetch("http://localhost:5000/api/torneos").then((res) => res.json()),
-          fetch("http://localhost:5000/api/disciplinas").then((res) => res.json()),
-          fetch("http://localhost:5000/api/categorias").then((res) => res.json()),
+          fetch(`${API_URL}/partidos`).then((res) => res.json()),
+          fetch(`${API_URL}/competicion`).then((res) => res.json()),
+          fetch(`${API_URL}/competicion/resultados`).then((res) => res.json()),
+          fetch(`${API_URL}/torneos`).then((res) => res.json()),
+          fetch(`${API_URL}/disciplinas`).then((res) => res.json()),
+          fetch(`${API_URL}/categorias`).then((res) => res.json()),
         ]);
 
         console.log('✅ Datos cargados exitosamente:', {

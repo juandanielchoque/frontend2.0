@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Dialog, DialogActions, DialogContent, DialogTitle, TextField, Button, Snackbar, MenuItem, Checkbox, FormControlLabel, FormGroup, Grid, Typography, Divider, Box } from '@mui/material';
 import axios from 'axios';
 
+const API_URL = `${process.env.REACT_APP_API_URL}/api`;
+
 const CrearTorneoModal = ({ open, onClose }) => {
   const [newTorneo, setNewTorneo] = useState({
     nombre: '',
@@ -21,7 +23,7 @@ const CrearTorneoModal = ({ open, onClose }) => {
   const [noCategorias, setNoCategorias] = useState(false);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/categorias/categorias')
+    axios.get(`${API_URL}/categorias/categorias`)
       .then((response) => {
         setAllCategorias(response.data);
       })
@@ -79,7 +81,7 @@ const CrearTorneoModal = ({ open, onClose }) => {
       }
 
       await axios.post(
-        'http://localhost:5000/api/torneos',
+        `${API_URL}/torneos`,
         {
           ...newTorneo,
           categorias: noCategorias ? [] : categorias,

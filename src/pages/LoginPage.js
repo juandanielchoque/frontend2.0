@@ -2,6 +2,8 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+const API_URL = `${process.env.REACT_APP_API_URL}/api`;
+
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -15,7 +17,7 @@ const LoginPage = () => {
     console.log('Intentando iniciar sesión con:', { email, password });
 
     try {
-        const response = await axios.post('${API_URL}/api/auth/login', {
+        const response = await axios.post(`${API_URL}/auth/login`, {
             email,
             password
         }, {
