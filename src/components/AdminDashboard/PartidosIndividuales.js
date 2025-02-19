@@ -11,7 +11,7 @@ const PartidosIndividuales = () => {
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [disciplinas, setDisciplinas] = useState([]);
-  const [modalOpen, setModalOpen] = useState(false); // Estado para el modal
+  const [modalOpen, setModalOpen] = useState(false); // Estado para el modals
   const [equipos, setEquipos] = useState([]); // Estado para los equipos
 
   useEffect(() => {
