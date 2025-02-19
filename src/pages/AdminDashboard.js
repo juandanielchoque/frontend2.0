@@ -82,16 +82,16 @@ const AdminDashboard = () => {
     const fetchData = async () => {
       try {
         const statsResponse = await axios.get(
-          "http://localhost:5000/api/torneos/estadisticas"
+          "${API_URL}/api/torneos/estadisticas"
         );
         const torneosResponse = await axios.get(
-          "http://localhost:5000/api/torneos"
+          "${API_URL}/api/torneos"
         );
         const equiposResponse = await axios.get(
-          "http://localhost:5000/api/equipos"
+          "${API_URL}/api/equipos"
         );
         const partidosResponse = await axios.get(
-          "http://localhost:5000/api/partidos"
+          "${API_URL}/api/partidos"
         );
   
 
@@ -129,7 +129,7 @@ const AdminDashboard = () => {
 
   const eliminarEquipo = async (equipoId) => {
     try {
-      await axios.delete(`http://localhost:5000/api/equipos/${equipoId}`);
+      await axios.delete(`${API_URL}/api/equipos/${equipoId}`);
       setEquipos(equipos.filter((equipo) => equipo.id !== equipoId));
     } catch (error) {
       console.error("Error al eliminar el equipo:", error);
@@ -180,7 +180,7 @@ const AdminDashboard = () => {
 
   const handleDeleteTorneo = async () => {
     try {
-      await axios.delete(`http://localhost:5000/api/torneos/${torneoToDelete}`);
+      await axios.delete(`${API_URL}/api/torneos/${torneoToDelete}`);
       setTorneos(torneos.filter((torneo) => torneo.id !== torneoToDelete));
       setOpenDeleteModal(false);
       setTorneoToDelete(null);
@@ -202,7 +202,7 @@ const AdminDashboard = () => {
   const fetchPosiciones = async (idTorneo) => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/torneos/${idTorneo}/posiciones`
+        `${API_URL}/api/torneos/${idTorneo}/posiciones`
       );
       setPosiciones(response.data);
     } catch (error) {
@@ -235,7 +235,7 @@ const AdminDashboard = () => {
 
   const handleVerJugadores = async (equipoId) => {
     try {
-      const response = await axios.get("http://localhost:5000/api/jugadores");
+      const response = await axios.get("${API_URL}/api/jugadores");
       const jugadoresEquipo = response.data.filter(
         (jugador) => jugador.equipo_id === equipoId
       );
@@ -284,10 +284,10 @@ const AdminDashboard = () => {
     }
 
     try {
-      await axios.post("http://localhost:5000/api/equipos", nuevoEquipo);
+      await axios.post("${API_URL}/api/equipos", nuevoEquipo);
       handleCerrarFormularioEquipo();
       const equiposResponse = await axios.get(
-        "http://localhost:5000/api/equipos"
+        "${API_URL}/api/equipos"
       );
       setEquipos(equiposResponse.data);
     } catch (error) {
