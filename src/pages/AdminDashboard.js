@@ -37,7 +37,8 @@ import Partidos from "../components/Partidos";
 import PartidoIndividual from "../components/AdminDashboard/PartidosIndividuales";
 import PuntajeDisciplinas from "../components/TablasDisciplina/PuntajeDisciplinas";
 
-const API_URL = `${process.env.REACT_APP_API_URL}/api`;
+const API_URL = process.env.REACT_APP_API_URL;
+
 
 const AdminDashboard = () => {
   const [activeSection, setActiveSection] = useState("Estadísticas");
